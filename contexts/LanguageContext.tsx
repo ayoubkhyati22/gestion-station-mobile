@@ -13,7 +13,7 @@ interface LanguageContextType {
 const AVAILABLE_LANGUAGES = [
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
   { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'ع', name: 'العربية', flag: 'ع' }
+  { code: 'ar', name: 'العربية', flag: 'ar' }
 ];
 
 // Clé pour le stockage local

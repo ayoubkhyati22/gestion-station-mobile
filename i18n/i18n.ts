@@ -191,7 +191,7 @@ const resources = {
       connectionError: 'Erreur de connexion'
     }
   },
-  ع: {
+  ar: {
     translation: {
       selectLanguage: 'اختر اللغة',
       // Navigation et interface générale
