@@ -136,33 +136,37 @@ export default function DashboardScreen() {
           <Text style={styles.sectionTitle}>{t('quickActions')}</Text>
 
           <View style={styles.actionsGrid}>
-            <ActionButton
-              title={t('enterMeters')}
-              icon={<Settings />}
-              onPress={() => router.push('/compteurs')}
-              style={styles.actionCard}
-            />
-            <ActionButton
-              title={t('addSale')}
-              icon={<Plus />}
-              onPress={() => router.push('/ventes')}
-              color="#059669"
-              style={styles.actionCard}
-            />
-            <ActionButton
-              title={t('posTicket')}
-              icon={<CreditCard />}
-              onPress={() => router.push('/tpe')}
-              color="#7C3AED"
-              style={styles.actionCard}
-            />
-            <ActionButton
-              title={t('viewReport')}
-              icon={<TrendingUp />}
-              onPress={() => router.push('/rapport')}
-              color="#F59E0B"
-              style={styles.actionCard}
-            />
+            <View style={styles.actionCard}>
+              <ActionButton
+                title={t('enterMeters')}
+                icon={<Settings />}
+                onPress={() => router.push('/compteurs')}
+              />
+            </View>
+            <View style={styles.actionCard}>
+              <ActionButton
+                title={t('addSale')}
+                icon={<Plus />}
+                onPress={() => router.push('/ventes')}
+                color="#059669"
+              />
+            </View>
+            <View style={styles.actionCard}>
+              <ActionButton
+                title={t('posTicket')}
+                icon={<CreditCard />}
+                onPress={() => router.push('/tpe')}
+                color="#7C3AED"
+              />
+            </View>
+            <View style={styles.actionCard}>
+              <ActionButton
+                title={t('viewReport')}
+                icon={<TrendingUp />}
+                onPress={() => router.push('/rapport')}
+                color="#F59E0B"
+              />
+            </View>
           </View>
         </Card>
 
@@ -209,11 +213,11 @@ const styles = StyleSheet.create({
   actionsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
+    justifyContent: 'space-between',
     marginTop: 12,
   },
   actionCard: {
     width: '48%',
-    minHeight: 80,
+    marginBottom: 12,
   },
 });
