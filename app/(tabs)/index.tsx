@@ -136,29 +136,37 @@ export default function DashboardScreen() {
           <Text style={styles.sectionTitle}>{t('quickActions')}</Text>
 
           <View style={styles.actionsGrid}>
-            <ActionButton
-              title={t('enterMeters')}
-              icon={<Settings />}
-              onPress={() => router.push('/compteurs')}
-            />
-            <ActionButton
-              title={t('addSale')}
-              icon={<Plus />}
-              onPress={() => router.push('/ventes')}
-              color="#059669"
-            />
-            <ActionButton
-              title={t('posTicket')}
-              icon={<CreditCard />}
-              onPress={() => router.push('/tpe')}
-              color="#7C3AED"
-            />
-            <ActionButton
-              title={t('viewReport')}
-              icon={<TrendingUp />}
-              onPress={() => router.push('/rapport')}
-              color="#F59E0B"
-            />
+            <View style={styles.actionRow}>
+              <ActionButton
+                title={t('enterMeters')}
+                icon={<Settings />}
+                onPress={() => router.push('/compteurs')}
+                style={styles.actionCard}
+              />
+              <ActionButton
+                title={t('addSale')}
+                icon={<Plus />}
+                onPress={() => router.push('/ventes')}
+                color="#059669"
+                style={styles.actionCard}
+              />
+            </View>
+            <View style={styles.actionRow}>
+              <ActionButton
+                title={t('posTicket')}
+                icon={<CreditCard />}
+                onPress={() => router.push('/tpe')}
+                color="#7C3AED"
+                style={styles.actionCard}
+              />
+              <ActionButton
+                title={t('viewReport')}
+                icon={<TrendingUp />}
+                onPress={() => router.push('/rapport')}
+                color="#F59E0B"
+                style={styles.actionCard}
+              />
+            </View>
           </View>
         </Card>
 
@@ -203,9 +211,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   actionsGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
     marginTop: 12,
+    gap: 12,
+  },
+  actionRow: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  actionCard: {
+    flex: 1,
+    minHeight: 80,
   },
 });
