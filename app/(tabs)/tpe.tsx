@@ -1,212 +1,106 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
-  TextInput,
-  TouchableOpacity,
   StyleSheet,
   ScrollView,
-  Alert,
 } from 'react-native';
-import { supabase } from '@/lib/supabase';
 import { useTranslation } from 'react-i18next';
+import { useTPE } from '@/hooks/useTPE';
 import { Save, CreditCard, User, Car } from 'lucide-react-native';
 
+// Components
+import { Header } from '@/components/common/Header';
+import { TabSelector } from '@/components/tpe/TabSelector';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/Card';
+
 export default function TPEScreen() {
-  const [nomClient, setNomClient] = useState('');
-  const [montant, setMontant] = useState('');
-  const [montantLavage, setMontantLavage] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState<'tpe' | 'lavage'>('tpe');
-  const { t } = useTranslation(); // Hook pour les traductions
-
-  const handleSaveTPE = async () => {
-    if (!nomClient || !montant) {
-      Alert.alert(t('error'), t('fillAllFields'));
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const today = new Date().toISOString().split('T')[0];
-      
-      const { error } = await supabase
-        .from('tickets_tpe')
-        .insert({
-          nom_client: nomClient,
-          montant: parseFloat(montant),
-          date: today,
-        });
-
-      if (error) throw error;
-
-      Alert.alert(t('success'), t('posTicketSavedSuccess'));
-      
-      // Reset form
-      setNomClient('');
-      setMontant('');
-    } catch (error: any) {
-      Alert.alert(t('error'), error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSaveLavage = async () => {
-    if (!montantLavage) {
-      Alert.alert(t('error'), t('enterAmount'));
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const today = new Date().toISOString().split('T')[0];
-      
-      const { error } = await supabase
-        .from('lavages')
-        .insert({
-          montant: parseFloat(montantLavage),
-          date: today,
-        });
-
-      if (error) throw error;
-
-      Alert.alert(t('success'), t('washSavedSuccess'));
-      
-      // Reset form
-      setMontantLavage('');
-    } catch (error: any) {
-      Alert.alert(t('error'), error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const TabButton = ({ 
-    value, 
-    label, 
-    icon 
-  }: { 
-    value: 'tpe' | 'lavage'; 
-    label: string; 
-    icon: React.ReactNode; 
-  }) => (
-    <TouchableOpacity
-      style={[
-        styles.tabButton,
-        activeTab === value && styles.tabButtonActive,
-      ]}
-      onPress={() => setActiveTab(value)}
-    >
-      {icon}
-      <Text
-        style={[
-          styles.tabButtonText,
-          activeTab === value && styles.tabButtonTextActive,
-        ]}
-      >
-        {label}
-      </Text>
-    </TouchableOpacity>
-  );
+  const { t } = useTranslation();
+  const {
+    nomClient,
+    setNomClient,
+    montant,
+    setMontant,
+    montantLavage,
+    setMontantLavage,
+    loading,
+    activeTab,
+    setActiveTab,
+    handleSaveTPE,
+    handleSaveLavage,
+  } = useTPE();
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.headerInfo}>
-          <CreditCard size={24} color="#2563EB" />
-          <Text style={styles.headerTitle}>{t('tpeAndWash')}</Text>
-        </View>
-      </View>
+      <Header
+        title={t('tpeAndWash')}
+        icon={<CreditCard size={24} color="#2563EB" />}
+      />
 
-      <View style={styles.tabContainer}>
-        <TabButton
-          value="tpe"
-          label={t('posTicket')}
-          icon={<CreditCard size={18} color={activeTab === 'tpe' ? 'white' : '#7C3AED'} />}
-        />
-        <TabButton
-          value="lavage"
-          label={t('lavage')}
-          icon={<Car size={18} color={activeTab === 'lavage' ? 'white' : '#0891B2'} />}
-        />
-      </View>
+      <TabSelector
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        t={t}
+      />
 
       <ScrollView style={styles.content}>
         {activeTab === 'tpe' ? (
-          <View style={styles.form}>
+          <Card>
             <Text style={styles.formTitle}>{t('addPosTicket')}</Text>
             
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{t('clientName')}</Text>
-              <View style={styles.inputContainer}>
-                <User size={20} color="#6B7280" />
-                <TextInput
-                  style={styles.input}
-                  value={nomClient}
-                  onChangeText={setNomClient}
-                  placeholder={t('clientName')}
-                  autoCapitalize="words"
-                />
-              </View>
-            </View>
+            <Input
+              label={t('clientName')}
+              value={nomClient}
+              onChangeText={setNomClient}
+              placeholder={t('clientName')}
+              autoCapitalize="words"
+              icon={<User size={20} color="#6B7280" />}
+            />
 
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{t('amount')}</Text>
-              <View style={styles.inputContainer}>
-                <CreditCard size={20} color="#6B7280" />
-                <TextInput
-                  style={styles.input}
-                  value={montant}
-                  onChangeText={setMontant}
-                  placeholder={t('amount')}
-                  keyboardType="numeric"
-                />
-                <Text style={styles.inputUnit}>{t('dh')}</Text>
-              </View>
-            </View>
+            <Input
+              label={t('amount')}
+              value={montant}
+              onChangeText={setMontant}
+              placeholder={t('amount')}
+              keyboardType="numeric"
+              icon={<CreditCard size={20} color="#6B7280" />}
+              unit={t('dh')}
+            />
 
-            <TouchableOpacity
-              style={[styles.saveButton, loading && styles.buttonDisabled]}
-              onPress={handleSaveTPE}
+            <Button
+              title={loading ? t('saving') : t('savePosTicket')}
+              onPress={() => handleSaveTPE(t)}
               disabled={loading}
-            >
-              <Save size={20} color="white" />
-              <Text style={styles.saveButtonText}>
-                {loading ? t('saving') : t('savePosTicket')}
-              </Text>
-            </TouchableOpacity>
-          </View>
+              loading={loading}
+              icon={<Save size={20} color="white" />}
+              variant="primary"
+            />
+          </Card>
         ) : (
-          <View style={styles.form}>
+          <Card>
             <Text style={styles.formTitle}>{t('addWash')}</Text>
             
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>{t('washAmount')}</Text>
-              <View style={styles.inputContainer}>
-                <Car size={20} color="#6B7280" />
-                <TextInput
-                  style={styles.input}
-                  value={montantLavage}
-                  onChangeText={setMontantLavage}
-                  placeholder={t('washAmount')}
-                  keyboardType="numeric"
-                />
-                <Text style={styles.inputUnit}>{t('dh')}</Text>
-              </View>
-            </View>
+            <Input
+              label={t('washAmount')}
+              value={montantLavage}
+              onChangeText={setMontantLavage}
+              placeholder={t('washAmount')}
+              keyboardType="numeric"
+              icon={<Car size={20} color="#6B7280" />}
+              unit={t('dh')}
+            />
 
-            <TouchableOpacity
-              style={[styles.saveButton, styles.saveButtonLavage, loading && styles.buttonDisabled]}
-              onPress={handleSaveLavage}
+            <Button
+              title={loading ? t('saving') : t('saveWash')}
+              onPress={() => handleSaveLavage(t)}
               disabled={loading}
-            >
-              <Save size={20} color="white" />
-              <Text style={styles.saveButtonText}>
-                {loading ? t('saving') : t('saveWash')}
-              </Text>
-            </TouchableOpacity>
-          </View>
+              loading={loading}
+              icon={<Save size={20} color="white" />}
+              style={styles.saveButtonLavage}
+            />
+          </Card>
         )}
       </ScrollView>
     </View>
@@ -218,60 +112,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F8FAFC',
   },
-  header: {
-    backgroundColor: 'white',
-    padding: 20,
-    paddingTop: 40,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
-  },
-  headerInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#1E293B',
-  },
-  tabContainer: {
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    marginHorizontal: 16,
-    marginTop: 16,
-    borderRadius: 8,
-    padding: 4,
-    gap: 4,
-  },
-  tabButton: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 12,
-    borderRadius: 6,
-    gap: 6,
-  },
-  tabButtonActive: {
-    backgroundColor: '#2563EB',
-  },
-  tabButtonText: {
-    fontSize: 14,
-    fontWeight: '500',
-    color: '#374151',
-  },
-  tabButtonTextActive: {
-    color: 'white',
-  },
   content: {
     flex: 1,
     padding: 16,
-  },
-  form: {
-    backgroundColor: 'white',
-    borderRadius: 12,
-    padding: 20,
   },
   formTitle: {
     fontSize: 18,
@@ -279,53 +122,7 @@ const styles = StyleSheet.create({
     color: '#1E293B',
     marginBottom: 20,
   },
-  section: {
-    marginBottom: 24,
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#1E293B',
-    marginBottom: 12,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#D1D5DB',
-    borderRadius: 8,
-    backgroundColor: '#F9FAFB',
-    paddingHorizontal: 12,
-    gap: 8,
-  },
-  input: {
-    flex: 1,
-    height: 48,
-    fontSize: 16,
-  },
-  inputUnit: {
-    fontSize: 14,
-    color: '#6B7280',
-    fontWeight: '500',
-  },
-  saveButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#7C3AED',
-    padding: 16,
-    borderRadius: 8,
-    gap: 8,
-  },
   saveButtonLavage: {
     backgroundColor: '#0891B2',
-  },
-  buttonDisabled: {
-    opacity: 0.6,
-  },
-  saveButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
   },
 });
