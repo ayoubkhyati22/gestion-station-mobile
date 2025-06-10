@@ -31,7 +31,7 @@ export const TotalCard: React.FC<TotalCardProps> = ({
 
 const styles = StyleSheet.create({
   totalCard: {
-    backgroundColor: '#F8FAFC',
+    backgroundColor: 'blue',
     padding: 20,
     borderRadius: 8,
     alignItems: 'center',
