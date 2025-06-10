@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   totalCard: {
     backgroundColor: '#2563EB',
     padding: 20,
-    borderRadius: 8,
+    borderRadius: 2,
     alignItems: 'center',
     minHeight: 80,
   },
