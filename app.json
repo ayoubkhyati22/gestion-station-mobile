@@ -36,6 +36,10 @@
         "WRITE_EXTERNAL_STORAGE",
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
         "READ_EXTERNAL_STORAGE"
       ]
     },
@@ -44,7 +48,7 @@
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/77be66ed-f828-45b8-a89e-cb72bb309a72"
+      "url": "https://u.expo.dev/b88634f2-ab52-4a3b-98ff-20e21c2a8556"
     }
   }
 }
