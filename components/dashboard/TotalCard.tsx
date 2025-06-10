@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   totalLabel: {
     fontSize: 14,
-    color: '#BFDBFE',
+    color: 'grey',
     marginBottom: 4,
   },
   totalValue: {
