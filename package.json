@@ -46,7 +46,8 @@
     "expo-print": "~14.1.4",
     "expo-sharing": "~13.1.5",
     "expo-file-system": "~18.1.10",
-    "expo-updates": "~0.28.14"
+    "expo-updates": "~0.28.14",
+    "expo-dev-client": "~5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
