@@ -27,11 +27,24 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "0499425a-1385-4573-a6af-883d21f893bf"
+        "projectId": "77be66ed-f828-45b8-a89e-cb72bb309a72"
       }
     },
     "android": {
-      "package": "com.ayoubkhyati22.gestionstation"
+      "package": "com.ayoubkhyati22.gestionstation",
+      "permissions": [
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE"
+      ]
+    },
+    "owner": "ayoubkhyati22",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/77be66ed-f828-45b8-a89e-cb72bb309a72"
     }
   }
 }
