@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 2,
+    padding: 8,
   },
   section: {
     marginBottom: 16,
