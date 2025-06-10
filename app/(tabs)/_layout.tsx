@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Chrome as Home, Gauge, CirclePlus as PlusCircle, Receipt, FileText } from 'lucide-react-native';
+import { Home as Home, Gauge, CirclePlus as PlusCircle, Receipt, FileText } from 'lucide-react-native';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
