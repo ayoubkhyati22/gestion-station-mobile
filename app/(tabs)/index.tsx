@@ -89,38 +89,50 @@ export default function DashboardScreen() {
           </View>
 
           <View style={styles.statsContainer}>
-            <StatCard
-              title={t('essence')}
-              value={stats.totalEssence}
-              icon={<Fuel size={24} color="#EF4444" />}
-              color="#EF4444"
-              isLoading={loading.essence}
-              currency={t('dh')}
-            />
-            <StatCard
-              title={t('gasoil')}
-              value={stats.totalGasoil}
-              icon={<Droplets size={24} color="#059669" />}
-              color="#059669"
-              isLoading={loading.gasoil}
-              currency={t('dh')}
-            />
-            <StatCard
-              title={t('tpe')}
-              value={stats.totalTPE}
-              icon={<CreditCard size={24} color="#7C3AED" />}
-              color="#7C3AED"
-              isLoading={loading.tpe}
-              currency={t('dh')}
-            />
-            <StatCard
-              title={t('lavage')}
-              value={stats.totalLavage}
-              icon={<Car size={24} color="#0891B2" />}
-              color="#0891B2"
-              isLoading={loading.lavage}
-              currency={t('dh')}
-            />
+            <View style={styles.statsRow}>
+              <View style={styles.statCard}>
+                <StatCard
+                  title={t('essence')}
+                  value={stats.totalEssence}
+                  icon={<Fuel size={24} color="#EF4444" />}
+                  color="#EF4444"
+                  isLoading={loading.essence}
+                  currency={t('dh')}
+                />
+              </View>
+              <View style={styles.statCard}>
+                <StatCard
+                  title={t('gasoil')}
+                  value={stats.totalGasoil}
+                  icon={<Droplets size={24} color="#059669" />}
+                  color="#059669"
+                  isLoading={loading.gasoil}
+                  currency={t('dh')}
+                />
+              </View>
+            </View>
+            <View style={styles.statsRow}>
+              <View style={styles.statCard}>
+                <StatCard
+                  title={t('tpe')}
+                  value={stats.totalTPE}
+                  icon={<CreditCard size={24} color="#7C3AED" />}
+                  color="#7C3AED"
+                  isLoading={loading.tpe}
+                  currency={t('dh')}
+                />
+              </View>
+              <View style={styles.statCard}>
+                <StatCard
+                  title={t('lavage')}
+                  value={stats.totalLavage}
+                  icon={<Car size={24} color="#0891B2" />}
+                  color="#0891B2"
+                  isLoading={loading.lavage}
+                  currency={t('dh')}
+                />
+              </View>
+            </View>
           </View>
 
           <TotalCard
@@ -207,8 +219,15 @@ const styles = StyleSheet.create({
     color: '#1E293B',
   },
   statsContainer: {
-    gap: 12,
     marginBottom: 20,
+  },
+  statsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 12,
+  },
+  statCard: {
+    width: '48%',
   },
   actionsGrid: {
     flexDirection: 'row',
