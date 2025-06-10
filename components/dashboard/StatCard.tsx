@@ -24,9 +24,12 @@ export const StatCard: React.FC<StatCardProps> = ({
 }) => {
   return (
     <View style={styles.statCard}>
+      {/* Icon at the top */}
       <View style={[styles.statIcon, { backgroundColor: color + '20' }]}>
         {icon}
       </View>
+      
+      {/* Price and title at the bottom */}
       <View style={styles.statContent}>
         {isLoading ? (
           <>
@@ -50,37 +53,41 @@ export const StatCard: React.FC<StatCardProps> = ({
 
 const styles = StyleSheet.create({
   statCard: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: '#F8FAFC',
     padding: 16,
     borderRadius: 8,
-    gap: 12,
-    minHeight: 80,
+    minHeight: 120,
+    justifyContent: 'space-between',
   },
   statIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 8,
   },
   statContent: {
-    flex: 1,
+    alignItems: 'center',
   },
   statValue: {
     fontSize: 18,
     fontWeight: '700',
     color: '#1E293B',
+    textAlign: 'center',
   },
   statTitle: {
     fontSize: 14,
     color: '#64748B',
-    marginTop: 2,
+    marginTop: 4,
+    textAlign: 'center',
   },
   statDetails: {
     fontSize: 12,
     color: '#9CA3AF',
     marginTop: 2,
+    textAlign: 'center',
   },
 });
