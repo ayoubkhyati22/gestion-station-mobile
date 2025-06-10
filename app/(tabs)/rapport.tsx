@@ -125,42 +125,54 @@ export default function RapportScreen() {
           </View>
           
           <View style={styles.statsContainer}>
-            <StatCard
-              title={t('essence')}
-              value={rapport.totalEssence}
-              icon={<Fuel size={20} color="#EF4444" />}
-              color="#EF4444"
-              details={`${rapport.ventesEssence.length} ${t('sales')}`}
-              isLoading={loading.essence}
-              currency={t('dh')}
-            />
-            <StatCard
-              title={t('gasoil')}
-              value={rapport.totalGasoil}
-              icon={<Droplets size={20} color="#059669" />}
-              color="#059669"
-              details={`${rapport.ventesGasoil.length} ${t('sales')}`}
-              isLoading={loading.gasoil}
-              currency={t('dh')}
-            />
-            <StatCard
-              title={t('tpe')}
-              value={rapport.totalTPE}
-              icon={<CreditCard size={20} color="#7C3AED" />}
-              color="#7C3AED"
-              details={`${rapport.ticketsTPE.length} ${t('tickets')}`}
-              isLoading={loading.tpe}
-              currency={t('dh')}
-            />
-            <StatCard
-              title={t('lavage')}
-              value={rapport.totalLavage}
-              icon={<Car size={20} color="#0891B2" />}
-              color="#0891B2"
-              details={`${rapport.lavages.length} ${t('washes')}`}
-              isLoading={loading.lavage}
-              currency={t('dh')}
-            />
+            <View style={styles.statsRow}>
+              <View style={styles.statCard}>
+                <StatCard
+                  title={t('essence')}
+                  value={rapport.totalEssence}
+                  icon={<Fuel size={20} color="#EF4444" />}
+                  color="#EF4444"
+                  details={`${rapport.ventesEssence.length} ${t('sales')}`}
+                  isLoading={loading.essence}
+                  currency={t('dh')}
+                />
+              </View>
+              <View style={styles.statCard}>
+                <StatCard
+                  title={t('gasoil')}
+                  value={rapport.totalGasoil}
+                  icon={<Droplets size={20} color="#059669" />}
+                  color="#059669"
+                  details={`${rapport.ventesGasoil.length} ${t('sales')}`}
+                  isLoading={loading.gasoil}
+                  currency={t('dh')}
+                />
+              </View>
+            </View>
+            <View style={styles.statsRow}>
+              <View style={styles.statCard}>
+                <StatCard
+                  title={t('tpe')}
+                  value={rapport.totalTPE}
+                  icon={<CreditCard size={20} color="#7C3AED" />}
+                  color="#7C3AED"
+                  details={`${rapport.ticketsTPE.length} ${t('tickets')}`}
+                  isLoading={loading.tpe}
+                  currency={t('dh')}
+                />
+              </View>
+              <View style={styles.statCard}>
+                <StatCard
+                  title={t('lavage')}
+                  value={rapport.totalLavage}
+                  icon={<Car size={20} color="#0891B2" />}
+                  color="#0891B2"
+                  details={`${rapport.lavages.length} ${t('washes')}`}
+                  isLoading={loading.lavage}
+                  currency={t('dh')}
+                />
+              </View>
+            </View>
           </View>
 
           <TotalCard
@@ -287,8 +299,15 @@ const styles = StyleSheet.create({
     color: '#1E293B',
   },
   statsContainer: {
-    gap: 12,
     marginBottom: 20,
+  },
+  statsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 12,
+  },
+  statCard: {
+    width: '48%',
   },
   detailSection: {
     marginBottom: 16,
